@@ -25,30 +25,32 @@ def tweet(tweet)
   $client.update(tweet)
 end
 
-#tweet("Bonjour Monde")
+# tweet("Bonjour Monde")
 
-# Bot qui follow Louis
+# Bot qui follow un array de personnes
 
 def follow(person)
+  person.each do |person|
   $client.follow(person)
+  end
 end
 
-#follow("GabLaff")
+#follow(["@Justikro","@ThpTest","@thpnico","@Fabien_971"])
 
 
 # Méthode qui récupère les noms dans un array, les mentionne et les tweete
 
 def mention_people(people) 
-  people.each do |message|
-    message = 'Salut les copains ! ' + message
+  people.each do |user|
+    message = 'Salut les copains ! ' + user
     $client.update(message)
     end
 end
 
-#mention_people(["@Justikro","@ThpTest","@thpnico","@Fabien_971"])
+# mention_people(["@Justikro","@ThpTest","@thpnico","@Fabien_971"])
 
 
-# Méthode qui prend récupère les topics demandé par l'utilisateur et affiche les tweet concernés
+# Méthode qui récupère les topics demandé par l'utilisateur et affiche les tweet concernés
 
 def stream_tweets(topics)
   $client2.filter(track: topics.join(",")) do |object|
@@ -58,13 +60,14 @@ end
 
 # stream_tweets(["love"])
 
-
-# Pour un array d'utilisateurs donnés, on récupère une liste des 20 derniers tweets que l'on stock dans un array
-# Puis on applique la fonction .favorite pour liker les tweets de chacun des utilisateurs
+# Méthode qui like les derniers tweets d'une liste de personne
 
 def like_tweets(person)
+
+# Pour un array d'utilisateurs donnés, on récupère une liste des 20 derniers tweets que l'on stock dans un array	
   person.each do |tweets|
     tweets = $client.user_timeline(person)
+# Puis on applique la fonction .favorite pour liker les tweets de chacun des utilisateurs
     tweets.each do |tweet|
     $client.favorite(tweet)
     end
@@ -72,5 +75,4 @@ def like_tweets(person)
 end
 
 # like_tweets(["@ThpTest", "@Fabien_971", "@thpnico"])
-
 
