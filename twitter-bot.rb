@@ -66,13 +66,36 @@ def like_tweets(person)
 
 # Pour un array d'utilisateurs donnés, on récupère une liste des 20 derniers tweets que l'on stock dans un array	
   person.each do |tweets|
-    tweets = $client.user_timeline(person)
+    tweets = $client.user_timeline(tweets)
 # Puis on applique la fonction .favorite pour liker les tweets de chacun des utilisateurs
+
     tweets.each do |tweet|
     $client.favorite(tweet)
     end
   end
 end
 
-# like_tweets(["@ThpTest", "@Fabien_971", "@thpnico"])
+# like_tweets(["@realDonaldTrump"])
+
+# En théorie, répond aux tweets des personnes rentrées par l'utilisateur
+
+
+def answer_tweets(person)
+    
+    person.each do |person|    
+      tweets = $client.user_timeline(person)
+
+      tweets.each do |tweet|
+        message = person + " Merci pour ce super tweet"
+        $client.update(message, in_reply_to_status_id: tweet)
+
+
+        end
+    end 
+end
+
+
+# answer_tweets(["@Fabien_971"])
+
+
 
