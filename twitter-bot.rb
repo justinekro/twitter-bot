@@ -66,7 +66,10 @@ def like_tweets(person)
 
 # Pour un array d'utilisateurs donnés, on récupère une liste des 20 derniers tweets que l'on stock dans un array	
   person.each do |tweets|
+  	    binding.pry
+    
     tweets = $client.user_timeline(tweets)
+
 # Puis on applique la fonction .favorite pour liker les tweets de chacun des utilisateurs
 
     tweets.each do |tweet|
@@ -75,7 +78,7 @@ def like_tweets(person)
   end
 end
 
-# like_tweets(["@realDonaldTrump"])
+like_tweets(["@realDonaldTrump"])
 
 # En théorie, répond aux tweets des personnes rentrées par l'utilisateur
 
